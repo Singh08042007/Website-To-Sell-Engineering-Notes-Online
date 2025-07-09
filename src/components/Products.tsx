@@ -31,7 +31,10 @@ export default function Products() {
                   alt={product.name} 
                   className="w-full h-40 sm:h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                 />
-                <div className="absolute top-4 right-4">
+                <div className="absolute top-4 right-4 space-y-2">
+                  <div className="bg-red-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold">
+                    50% OFF
+                  </div>
                   <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
                     ₹{product.price}
                   </div>
@@ -48,6 +51,21 @@ export default function Products() {
                 <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3">
                   {product.name}
                 </h3>
+                
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl font-bold text-green-600 dark:text-green-400">
+                      ₹{product.price}
+                    </span>
+                    <span className="text-lg text-gray-500 dark:text-gray-400 line-through">
+                      ₹{product.originalPrice}
+                    </span>
+                  </div>
+                  <div className="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 px-2 py-1 rounded-md text-xs font-semibold">
+                    SAVE 50%
+                  </div>
+                </div>
+                
                 <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 h-16 sm:h-20 leading-relaxed">
                   {product.description}
                 </p>
