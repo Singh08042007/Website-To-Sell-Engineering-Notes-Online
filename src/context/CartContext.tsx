@@ -28,11 +28,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setCartItems(prev => {
       const existingItem = prev.find(item => item.id === product.id);
       if (existingItem) {
-        return prev.map(item =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
+        // Don't add duplicate items, just keep quantity at 1
+        return prev;
       }
       return [...prev, { ...product, quantity: 1 }];
     });

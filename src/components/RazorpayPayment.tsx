@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreditCard, Shield, Zap, ExternalLink, ArrowRight } from 'lucide-react';
+import { CreditCard, Shield, Zap, ExternalLink, ArrowRight, Package } from 'lucide-react';
 
 interface RazorpayPaymentProps {
   total: number;
@@ -12,11 +12,55 @@ interface RazorpayPaymentProps {
 }
 
 export default function RazorpayPayment({ total, cartItems }: RazorpayPaymentProps) {
+  // Payment link mapping for individual products
+  const paymentLinks = {
+    1: 'https://rzp.io/rzp/notespayment', // AI & Machine Learning Complete Notes
+    2: 'https://rzp.io/rzp/datasciencenotes', // Data Science Fundamentals
+    3: 'https://rzp.io/rzp/pythonskills', // Python Programming Mastery
+    5: 'https://rzp.io/rzp/computernetworknotes', // Computer Networks & Security
+    6: 'https://rzp.io/rzp/softwarenotes' // Software Engineering & Design
+  };
+
+  const getCheckoutLink = () => {
+    // Get unique product IDs in cart
+    const uniqueProducts = [...new Set(cartItems.map(item => item.id))];
+    
+    // If only one type of product, use specific link
+    if (uniqueProducts.length === 1) {
+      const productId = uniqueProducts[0];
+      return paymentLinks[productId as keyof typeof paymentLinks];
+    }
+    
+    // If multiple different products, use general payment link
+    return 'https://rzp.io/rzp/notespricepayment';
+  };
+
   const handleCheckout = () => {
     if (total === 0) return;
     
-    // Open the Razorpay payment link in a new tab
-    window.open('https://razorpay.me/@engineeringnotespayment', '_blank');
+    const checkoutLink = getCheckoutLink();
+    window.open(checkoutLink, '_blank');
+  };
+
+  const getCheckoutMessage = () => {
+    const uniqueProducts = [...new Set(cartItems.map(item => item.id))];
+    
+    if (uniqueProducts.length === 1) {
+      const productName = cartItems[0].name;
+      return `Checkout for ${productName}`;
+    }
+    
+    return `Checkout for ${uniqueProducts.length} different note types`;
+  };
+
+  const getPaymentInstructions = () => {
+    const uniqueProducts = [...new Set(cartItems.map(item => item.id))];
+    
+    if (uniqueProducts.length === 1) {
+      return `You're purchasing ${cartItems[0].name}. Click checkout to proceed to the secure payment page for this specific product.`;
+    }
+    
+    return `You're purchasing ${uniqueProducts.length} different types of notes. Click checkout and enter the exact amount of ₹${total} on the payment page.`;
   };
 
   return (
@@ -43,16 +87,40 @@ export default function RazorpayPayment({ total, cartItems }: RazorpayPaymentPro
         </div>
       </div>
 
-      {/* Checkout Amount Display */}
+      {/* Order Summary */}
       <div className="bg-white dark:bg-gray-700 rounded-xl p-4 border-2 border-dashed border-blue-200 dark:border-blue-700">
-        <div className="text-center">
-          <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">Total Checkout Amount</p>
+        <div className="text-center mb-4">
+          <div className="flex items-center justify-center space-x-2 mb-2">
+            <Package className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
+              {getCheckoutMessage()}
+            </p>
+          </div>
           <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             ₹{total}
           </div>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            {cartItems.length} item{cartItems.length !== 1 ? 's' : ''} in your cart
+            {cartItems.length} item{cartItems.length !== 1 ? 's' : ''} • {[...new Set(cartItems.map(item => item.id))].length} product type{[...new Set(cartItems.map(item => item.id))].length !== 1 ? 's' : ''}
           </p>
+        </div>
+
+        {/* Items in cart */}
+        <div className="space-y-2">
+          {[...new Set(cartItems.map(item => item.id))].map(productId => {
+            const item = cartItems.find(cartItem => cartItem.id === productId);
+            if (!item) return null;
+            
+            return (
+              <div key={productId} className="flex justify-between items-center text-sm bg-gray-50 dark:bg-gray-800 rounded-lg p-2">
+                <span className="text-gray-700 dark:text-gray-300 font-medium">
+                  {item.name}
+                </span>
+                <span className="text-gray-900 dark:text-white font-semibold">
+                  ₹{item.price}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -87,9 +155,7 @@ export default function RazorpayPayment({ total, cartItems }: RazorpayPaymentPro
                 Payment Instructions
               </h5>
               <p className="text-sm text-green-700 dark:text-green-400 leading-relaxed">
-                Click "Checkout & Pay" to proceed to our secure Razorpay payment page. 
-                Enter the exact amount of <strong>₹{total}</strong> and complete your payment. 
-                Download links will be sent to your email immediately after successful payment.
+                {getPaymentInstructions()} Download links will be sent to your email immediately after successful payment.
               </p>
             </div>
           </div>

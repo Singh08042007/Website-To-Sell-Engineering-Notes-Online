@@ -50,22 +50,8 @@ export default function Cart() {
                     </div>
                     
                     <div className="flex items-center justify-between sm:justify-end space-x-3 sm:space-x-4">
-                      <div className="flex items-center space-x-2 bg-white dark:bg-gray-700 rounded-lg p-1">
-                        <button
-                          onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
-                          className="p-1 hover:bg-gray-100 dark:hover:bg-gray-600 rounded"
-                        >
-                          <Minus className="w-4 h-4 text-gray-600 dark:text-gray-300" />
-                        </button>
-                        <span className="px-3 py-1 text-gray-900 dark:text-white font-medium">
-                          {item.quantity}
-                        </span>
-                        <button
-                          onClick={() => updateQuantity(item.id, Math.min(5, item.quantity + 1))}
-                          className="p-1 hover:bg-gray-100 dark:hover:bg-gray-600 rounded"
-                        >
-                          <Plus className="w-4 h-4 text-gray-600 dark:text-gray-300" />
-                        </button>
+                      <div className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-3 py-1 rounded-full text-sm font-semibold">
+                        Digital Download
                       </div>
                       
                       <button
