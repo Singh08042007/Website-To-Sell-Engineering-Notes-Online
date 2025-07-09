@@ -1,4 +1,5 @@
 import React from 'react';
+import { Sparkles, Gift, Download, Clock, ShoppingCart, Star } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { products } from '../data/products';
 
