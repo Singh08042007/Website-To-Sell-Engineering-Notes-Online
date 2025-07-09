@@ -6,6 +6,8 @@ import RazorpayPayment from './RazorpayPayment';
 export default function Cart() {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const originalTotal = cartItems.reduce((sum, item) => sum + item.originalPrice * item.quantity, 0);
+  const totalDiscount = originalTotal - total;
 
   return (
     <section id="cart" className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -85,17 +87,27 @@ export default function Cart() {
               
               <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
                 <div className="flex justify-between text-gray-600 dark:text-gray-300">
-                  <span>Subtotal</span>
-                  <span>₹{total}</span>
+                  <span>Original Price</span>
+                  <span className="line-through">₹{originalTotal}</span>
                 </div>
                 <div className="flex justify-between text-gray-600 dark:text-gray-300">
-                  <span>Discount</span>
-                  <span className="text-green-600">-₹0</span>
+                  <span className="flex items-center space-x-2">
+                    <span>Discount (50% OFF)</span>
+                    <span className="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 px-2 py-1 rounded-md text-xs font-semibold">
+                      SAVE 50%
+                    </span>
+                  </span>
+                  <span className="text-green-600 dark:text-green-400 font-semibold">-₹{totalDiscount}</span>
                 </div>
                 <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
                   <div className="flex justify-between text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
-                    <span>Total</span>
-                    <span>₹{total}</span>
+                    <span>Final Total</span>
+                    <span className="text-green-600 dark:text-green-400">₹{total}</span>
+                  </div>
+                  <div className="text-center mt-2">
+                    <span className="text-sm text-green-600 dark:text-green-400 font-medium">
+                      You save ₹{totalDiscount} with this order!
+                    </span>
                   </div>
                 </div>
               </div>
