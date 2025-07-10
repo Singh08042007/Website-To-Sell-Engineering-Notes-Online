@@ -30,8 +30,8 @@ export default function Cart() {
             </a>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-            <div className="lg:col-span-2 space-y-3 sm:space-y-4">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <div className="space-y-3 sm:space-y-4">
               {cartItems.map((item) => (
                 <div key={item.id} className="group relative bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl p-4 sm:p-6 transition-all duration-300 hover:shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
                   {/* Subtle gradient overlay */}
@@ -82,12 +82,12 @@ export default function Cart() {
               ))}
             </div>
             
-            <div className="relative bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl p-4 sm:p-6 h-fit transition-all duration-300 shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div className="relative bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 sm:p-8 transition-all duration-300 shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden max-w-2xl mx-auto">
               {/* Background decoration */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-2xl"></div>
               <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-green-400/10 to-emerald-400/10 rounded-full blur-xl"></div>
               
-              <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-4 sm:mb-6">
+              <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-white mb-6 sm:mb-8 text-center">
                 Order Summary
               </h3>
               
