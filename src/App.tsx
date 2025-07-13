@@ -1,6 +1,7 @@
 import React from 'react';
 import { CartProvider } from './context/CartContext';
 import { ThemeProvider } from './context/ThemeContext';
+import TawkChat from './components/TawkChat';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
@@ -14,6 +15,7 @@ function App() {
     <ThemeProvider>
       <CartProvider>
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+          <TawkChat />
           <Navbar />
           <Hero />
           <Features />
