@@ -11,7 +11,6 @@ Organized categories by branch/subject
 
 User-friendly experience
 
-🔗 Live Demo:
-🌐 Visit the website
+🔗 Live Demo: https://onlineengineeringnotes.netlify.app/
 
 💬 Feedback and contributions are welcome!
