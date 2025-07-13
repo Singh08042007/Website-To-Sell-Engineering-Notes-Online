@@ -63,14 +63,6 @@ export default function TawkChat({
       }
     }
 
-    // Cleanup function
-    return () => {
-      // Optional: Remove the script when component unmounts
-      const existingScript = document.querySelector(`script[src*="${propertyId}"]`);
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
   }, [propertyId, widgetId]);
 
   return null; // This component doesn't render anything visible
