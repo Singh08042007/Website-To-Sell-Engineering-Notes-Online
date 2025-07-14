@@ -14,7 +14,7 @@ export default function TawkChat() {
     // Create and load script
     const script = document.createElement('script');
     script.async = true;
-    script.src = 'https://embed.tawk.to/686f6c89ca9b1d190e69db47/1ivpjvugm';
+    script.src = 'https://embed.tawk.to/687361371417d9190c7e1a20/1j01b7gd4';
     script.charset = 'UTF-8';
     script.setAttribute('crossorigin', '*');
     

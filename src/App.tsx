@@ -8,6 +8,7 @@ import Products from './components/Products';
 import Cart from './components/Cart';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import TawkChat from './components/TawkChat';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Cart />
           <Contact />
           <Footer />
+          <TawkChat />
         </div>
       </CartProvider>
     </ThemeProvider>
